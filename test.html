@@ -94,6 +94,7 @@ ellipse.available-slot {
 <audio src="484266__inspectorj__party-pack-match-ignite-01-01.wav" id="ignite"></audio>
 <audio src="360949__marcusgar__drawer.wav" id="drawer"></audio>
 <audio src="398396__caitlin-100__knife-scrape.mp3" id="tileremove"></audio>
+<audio src="468414__atg65__power-failure.wav" id="coinfail"></audio>
 <audio src="Lightless%20Dawn.mp3" loop id="bgm"></audio>
 <div id="inventory">
     <ul>
@@ -102,6 +103,7 @@ ellipse.available-slot {
 <script>
 const unhidden = new Set();
 const nowhidden = new Set();
+let coin_move_count = 0;
 const handlers = {
     coin_click: el => {
         // if we don't have slots set up for coins, set them up
@@ -151,6 +153,7 @@ const handlers = {
         }
     },
     coin_slot_click: el => {
+        if (coin_move_count == 4) return;
         if (!el.classList.contains("available-slot")) return;
         let cc = document.querySelector(".chosen-coin");
         if (!cc) return;
@@ -170,6 +173,33 @@ const handlers = {
         if (existing_slots.length > 0) Array.from(existing_slots).map(es => {
             es.classList.remove("available-slot");
         });
+        coin_move_count += 1;
+        document.getElementById("coin_move_" + coin_move_count).style.display = "none";
+        if (coin_move_count == 4) {
+            let coins_in = Array.from(document.querySelectorAll("[data-coin-slot]")).map(cel => {
+                return cel.dataset.coinSlot.split("_").map(v => parseInt(v, 10));
+            })
+            let my = Math.min.apply(null, coins_in.map(a => a[0]));
+            let mx = Math.min.apply(null, coins_in.map(a => a[1]));
+            coins_in = coins_in.map(([y, x]) => [y-my, x-mx]);
+            coins_in.sort((a, b) => {
+                if (a[0] == b[0]) return a[1] - b[1];
+                return a[0] - b[0];
+            });
+            let result = coins_in.map(([y, x]) => y + "" + x).join("");
+            if (result == "010210122122" || result == "000110122021") {
+                console.log("ok!");
+                return;
+            } else {
+                console.log(result);
+            }
+
+            document.getElementById("coinfail").play();
+            setTimeout(() => {
+                coin_move_count = 0;
+                load("coins");
+            }, 1000);
+        }
     },
     drawer_slide: el => {
         if (!el.dataset.open) {
