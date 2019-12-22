@@ -16,7 +16,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="room.svg">
+   sodipodi:docname="room-n.svg">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4959847"
-     inkscape:cx="284.58568"
-     inkscape:cy="510.2459"
+     inkscape:zoom="7.4214866"
+     inkscape:cx="149.82988"
+     inkscape:cy="141.07219"
      inkscape:document-units="px"
      inkscape:current-layer="layer4"
      showgrid="false"
@@ -597,7 +597,11 @@
        width="26.458332"
        height="158.75"
        x="185.20833"
-       y="138.24998" />
+       y="138.24998">
+      <desc
+         id="desc995">left:room-w
+      </desc>
+     </rect>
   </g>
   <g
      inkscape:label="walls"
@@ -850,9 +854,10 @@ click:drawers
            ry="1.8493552"
            rx="1.8493552" />
         <path
-           style="stroke-linejoin:miter;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke:#000000;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:0.0102912758954;fill:#7a9135"
-           d="M37.455306 126.34989C37.455306 126.34989 33.934113 136.8041 33.934113 136.8041C33.934113 136.8041 35.895448 136.8041 35.895448 136.8041C35.895448 136.8041 41.779453 126.38874 41.779453 126.38874C41.779453 126.38874 37.455306 126.34994 37.455306 126.34994"
-           id="path1919" />
+           style="fill:#7a9135;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           d="m 37.455306,126.34989 c 0,0 -3.521193,10.45421 -3.521193,10.45421 0,0 1.961335,0 1.961335,0 0,0 5.884005,-10.41536 5.884005,-10.41536 0,0 -4.324147,-0.0388 -4.324147,-0.0388"
+           id="path1919"
+           inkscape:connector-curvature="0" />
       </g>
       <g
          id="g1929"
@@ -869,8 +874,9 @@ click:drawers
            style="opacity:1;fill:#7a9135;fill-opacity:1;stroke:#000000;stroke-width:1.04236038;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
         <path
            id="path1927"
-           d="M59.249056 126.34989C59.249056 126.34989 62.770249 136.8041 62.770249 136.8041C62.770249 136.8041 60.808914 136.8041 60.808914 136.8041C60.808914 136.8041 54.924909 126.38874 54.924909 126.38874C54.924909 126.38874 59.249056 126.34994 59.249056 126.34994"
-           style="stroke-linejoin:miter;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke:#000000;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:0.0102912758954;fill:#7a9135" />
+           d="m 59.249056,126.34989 c 0,0 3.521193,10.45421 3.521193,10.45421 0,0 -1.961335,0 -1.961335,0 0,0 -5.884005,-10.41536 -5.884005,-10.41536 0,0 4.324147,-0.0388 4.324147,-0.0388"
+           style="fill:#7a9135;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           inkscape:connector-curvature="0" />
       </g>
     </g>
     <path

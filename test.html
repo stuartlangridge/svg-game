@@ -4,9 +4,13 @@
 <meta charset="utf-8">
 <style>
 html, body, main { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    background: linear-gradient(to right, black, white);
+}
 main {
     width: 100vw;
     height: 100vh;
+    transition: opacity 100ms ease-out;
 }
 main > svg {
     margin: 0;
@@ -253,6 +257,7 @@ function hookup() {
         })
     // and show main (it was made invisible so that we don't see hidden stuff briefly appear)
     document.querySelector("main").style.opacity = "1";
+    console.log("opacity 1");
 }
 function resize() {
     // size the svg
@@ -301,10 +306,12 @@ async function load(r) {
     Array.from(document.querySelectorAll("aside div")).forEach(d => { d.remove() });
     let response = await fetch(r + ".svg");
     document.querySelector("main").style.opacity = "0";
-    document.querySelector("main").innerHTML = await response.text();
-    currentRoom = r;
-    resize();
-    setTimeout(hookup, 0);
+    setTimeout(async () => {
+        document.querySelector("main").innerHTML = await response.text();
+        currentRoom = r;
+        resize();
+        setTimeout(hookup, 0);
+    }, 100);
 }
 buttons.forEach(bname => {
     let b = document.getElementById(bname);

@@ -751,9 +751,9 @@
        x="185.20833"
        y="138.24998">
       <desc
-         id="desc995">down:room
-left:room
-right:room</desc>
+         id="desc995">down:room-n
+left:room-n
+right:room-n</desc>
     </rect>
   </g>
   <g
