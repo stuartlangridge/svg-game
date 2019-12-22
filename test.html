@@ -75,6 +75,12 @@ button {
     100% { transform: scaleY(1.05) }
 }
 
+.chosen-coin {
+    filter: drop-shadow(0px 0px 0.5px green);
+    transition: all 500ms ease-out;
+}
+.available-slot { filter: drop-shadow(0px 0px 0.5px green); }
+
 </style>
 </head>
 <body>
@@ -85,6 +91,8 @@ button {
 <button id="left">◂</button>
 <audio src="166184__drminky__retro-coin-collect.wav" id="collect"></audio>
 <audio src="484266__inspectorj__party-pack-match-ignite-01-01.wav" id="ignite"></audio>
+<audio src="360949__marcusgar__drawer.wav" id="drawer"></audio>
+<audio src="398396__caitlin-100__knife-scrape.mp3" id="tileremove"></audio>
 <audio src="Lightless%20Dawn.mp3" loop id="bgm"></audio>
 <div id="inventory">
     <ul>
@@ -92,7 +100,76 @@ button {
 </div>
 <script>
 const unhidden = new Set();
+const nowhidden = new Set();
 const handlers = {
+    coin_click: el => {
+        // if we don't have slots set up for coins, set them up
+        if (!document.querySelector("[data-coin-slot]")) {
+            document.getElementById("coin1").dataset.coinSlot = "4_3";
+            document.getElementById("coin2").dataset.coinSlot = "3_3";
+            document.getElementById("coin3").dataset.coinSlot = "3_4";
+            document.getElementById("coin4").dataset.coinSlot = "2_2";
+            document.getElementById("coin5").dataset.coinSlot = "2_3";
+            document.getElementById("coin6").dataset.coinSlot = "2_4";
+        }
+        let existing = document.querySelector(".chosen-coin");
+        if (existing) existing.classList.remove("chosen-coin");
+        let existing_slots = document.querySelectorAll(".available-slot");
+        if (existing_slots.length > 0) Array.from(existing_slots).map(es => {
+            es.classList.remove("available-slot");
+        });
+        if (existing == el) { return; }
+        el.classList.add("chosen-coin");
+        // and calculate available slots
+        let coins_in = Array.from(document.querySelectorAll("[data-coin-slot]")).map(cel => {
+            return cel.dataset.coinSlot.split("_").map(v => parseInt(v, 10));
+        })
+        let two_coin_slots = {};
+        let add = (x, y) => {
+            if (!two_coin_slots[[y,x]]) two_coin_slots[[y,x]] = 0;
+            two_coin_slots[[y,x]] += 1;
+        }
+        coins_in.forEach(([y, x]) => {
+            if (el.dataset.coinSlot == y + "_" + x) return; // can't count us as part of the 2 coins!
+            add(x-1, y); add(x+1, y);
+            if (y%2 == 1) {
+                // odd row
+                add(x-1, y-1); add(x, y-1); add(x-1, y+1); add(x, y+1);
+            } else {
+                // even row
+                add(x, y-1); add(x+1, y-1); add(x, y+1); add(x+1, y+1);
+            }
+        })
+        for (let k in two_coin_slots) {
+            if (two_coin_slots[k] >= 2) {
+                let slot = document.getElementById("coin_slot_" + k.replace(",", "_"));
+                if (slot) {
+                    slot.classList.add("available-slot");
+                }
+            }
+        }
+    },
+    coin_slot_click: el => {
+        if (!el.classList.contains("available-slot")) return;
+        let cc = document.querySelector(".chosen-coin");
+        if (!cc) return;
+        let fromSlot = document.getElementById("coin_slot_" + cc.dataset.coinSlot);
+        let fromBB = fromSlot.getBBox();
+        let toBB = el.getBBox();
+        let xdiff = toBB.x - fromBB.x;
+        let ydiff = toBB.y - fromBB.y;
+        let trans = cc.getAttribute("transform");
+        let parts = trans.replace("matrix(", "").replace(")", "").split(",");
+        parts[4] = (parseFloat(parts[4]) + xdiff).toString();
+        parts[5] = (parseFloat(parts[5]) + ydiff).toString();
+        cc.setAttribute("transform", "matrix(" + parts.join(",") + ")");
+        cc.classList.remove("chosen-coin");
+        cc.dataset.coinSlot = el.id.replace("coin_slot_", "");
+        let existing_slots = document.querySelectorAll(".available-slot");
+        if (existing_slots.length > 0) Array.from(existing_slots).map(es => {
+            es.classList.remove("available-slot");
+        });
+    },
     drawer_slide: el => {
         if (!el.dataset.open) {
             el.style.transform = "translateY(16%)";
@@ -101,6 +178,7 @@ const handlers = {
             el.style.transform = "";
             el.dataset.open = "";
         }
+        document.getElementById("drawer").play();
     },
     start_music: el => {
         document.getElementById("bgm").play();
@@ -120,9 +198,11 @@ const handlers = {
             if (li.dataset.using == "no") {
                 let existing = document.querySelector('li[data-using="yes"]');
                 if (existing) { existing.dataset.using = "no"; }
-                let crs = li.querySelector("svg").cloneNode(true);
-                crs.setAttribute("width", "120");
-                crs.setAttribute("height", "120");
+                let invsvg = li.querySelector("svg");
+                let crs = invsvg.cloneNode(true);
+                let bb = invsvg.getBoundingClientRect();
+                crs.setAttribute("width", bb.width);
+                crs.setAttribute("height", bb.width);
                 [_, _, vbw, vbh] = crs.getAttribute('viewBox').split(" ");
                 let pointer = document.createElementNS("http://www.w3.org/2000/svg", "path");
                 pointer.setAttribute("d", "M0,0 L" + (vbw / 8) + ",0 L0," + (vbw / 8) + "Z");
@@ -148,6 +228,12 @@ const handlers = {
             unhidden.add("glow");
             unhidden.add("secretmessage");
             document.getElementById("ignite").play();
+        } else if (nail == "tiles" && hammer == "knife") {
+            document.getElementById("tileholes").style.display = "block";
+            unhidden.add("tileholes");
+            document.getElementById("tiles").style.display = "none";
+            nowhidden.add("tiles");
+            document.getElementById("tileremove").play();
         }
     }
 }
@@ -202,8 +288,18 @@ function hookup() {
                         rect.setAttribute("width", vbbg.width)
                         rect.setAttribute("height", vbbg.height)
                         rect.setAttribute("fill", "transparent")
+                        rect.setAttribute("data-clickrect", "clickrect");
                         rect.dataset.clickable = "clickable";
-                        p.insertBefore(rect, p.firstChild);
+                        if (p.nodeName != "g") {
+                            // putting the clickrect inside another element is likely to
+                            // not work because the other element will eat all our clicks
+                            // so put it in the parent of the parentNode, and make sure it's
+                            // at the end, so definitely after the actual element and therefore
+                            // on top of it
+                            p.parentNode.appendChild(rect);
+                        } else {
+                            p.insertBefore(rect, p.firstChild);
+                        }
                         clickrect = rect;
                     }
                     rect.addEventListener("click", fn, false);
@@ -255,9 +351,14 @@ function hookup() {
                 obj.remove();
             }
         })
+    // and remove all now hidden items
+    Array.from(nowhidden).map(
+        item => { 
+            let obj = document.getElementById(item);
+            if (obj) obj.remove();
+        })
     // and show main (it was made invisible so that we don't see hidden stuff briefly appear)
     document.querySelector("main").style.opacity = "1";
-    console.log("opacity 1");
 }
 function resize() {
     // size the svg
