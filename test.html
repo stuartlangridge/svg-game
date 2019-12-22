@@ -1,0 +1,316 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+html, body, main { margin: 0; padding: 0; box-sizing: border-box; }
+main {
+    width: 100vw;
+    height: 100vh;
+}
+main > svg {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: absolute;
+}
+button {
+    background: transparent;
+    border-width: 0;
+    color: black;
+    position: absolute;
+    display: none;
+    filter: drop-shadow(0px 0px 2px #fff);
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 2vw;
+}
+#inventory {
+    position: absolute;
+    background: black;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#inventory ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+#inventory ul li {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(closest-side, white, black);
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    position: relative;
+}
+#inventory ul li[data-using="yes"] {
+    background: radial-gradient(closest-side, yellow, black);
+}
+#inventory ul li svg {
+    width: 90%;
+    height: 90%;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+}
+#draweropen1, #draweropen2, #draweropen3, #draweropen4 {
+    transition: transform 200ms ease-in-out;
+}
+#flame {
+    animation: flicker 220ms infinite alternate, judder 480ms infinite alternate;
+    transform-origin: 70% 20%;
+}
+@keyframes flicker { 0% { opacity: 0.7; } 100% { opacity: 1; } }
+@keyframes judder {
+    0% { transform: scaleY(0.95) } 
+    100% { transform: scaleY(1.05) }
+}
+
+</style>
+</head>
+<body>
+<main></main>
+<button id="up">▲</button>
+<button id="right">▸</button>
+<button id="down">▼</button>
+<button id="left">◂</button>
+<audio src="166184__drminky__retro-coin-collect.wav" id="collect"></audio>
+<audio src="484266__inspectorj__party-pack-match-ignite-01-01.wav" id="ignite"></audio>
+<audio src="Lightless%20Dawn.mp3" loop id="bgm"></audio>
+<div id="inventory">
+    <ul>
+    </ul>
+</div>
+<script>
+const unhidden = new Set();
+const handlers = {
+    drawer_slide: el => {
+        if (!el.dataset.open) {
+            el.style.transform = "translateY(16%)";
+            el.dataset.open = "yes";
+        } else {
+            el.style.transform = "";
+            el.dataset.open = "";
+        }
+    },
+    start_music: el => {
+        document.getElementById("bgm").play();
+    },
+    take: async el => {
+        /* remember to remove the desc from the SVGs for individual items, or they're takeable
+           when they're in inventory */
+        taken.push({scene: currentRoom, obj: el.getAttribute("id")});
+        el.remove();
+        document.getElementById("collect").play();
+        let li = document.createElement("li");
+        let response = await fetch(el.id + ".svg");
+        li.innerHTML = await response.text();
+        li.dataset.using = "no";
+        li.dataset.item = el.id;
+        li.onclick = function() {
+            if (li.dataset.using == "no") {
+                let existing = document.querySelector('li[data-using="yes"]');
+                if (existing) { existing.dataset.using = "no"; }
+                let crs = li.querySelector("svg").cloneNode(true);
+                crs.setAttribute("width", "120");
+                crs.setAttribute("height", "120");
+                [_, _, vbw, vbh] = crs.getAttribute('viewBox').split(" ");
+                let pointer = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                pointer.setAttribute("d", "M0,0 L" + (vbw / 8) + ",0 L0," + (vbw / 8) + "Z");
+                pointer.setAttribute("fill", "red")
+                crs.appendChild(pointer);
+                let dataurl = "data:image/svg+xml;base64," + btoa(crs.outerHTML);
+                document.body.style.cursor = "url(" + dataurl + "), auto";
+                li.dataset.using = "yes";
+            } else {
+                document.body.style.cursor = "auto";
+                li.dataset.using = "no";
+            }
+        }
+        document.querySelector("#inventory ul").appendChild(li);
+    },
+    use: (nail, hammer) => { // these are IDs, not elements
+        console.log("using", hammer, "on", nail);
+        if (nail == "candle" && hammer == "matches") {
+            document.getElementById("flame").style.display = "block";
+            document.getElementById("glow").style.display = "block";
+            document.getElementById("secretmessage").style.display = "block";
+            unhidden.add("flame");
+            unhidden.add("glow");
+            unhidden.add("secretmessage");
+            document.getElementById("ignite").play();
+        }
+    }
+}
+let currentRoom;
+const taken = [];
+const buttons = new Set(["down", "up", "left", "right"]);
+function hookup() {
+    let buttons_found = new Set();
+    let aside = document.querySelector("aside");
+    Array.from(document.querySelectorAll("svg desc")).forEach(el => {
+        let p = el.parentNode;
+        let clickrect;
+        el.textContent.split("\n").forEach(line => {
+            let parts = line.trim().split(":");
+            if (parts.length == 2) {
+                if (parts[0] == "click" || parts[0] == "use") {
+                    let fn;
+                    if (parts[0] == "use") {
+                        fn = (e) => {
+                            // note: you must define use handlers before click handlers in the description!
+                            // otherwise the click handler will be defined before the use handler, and so
+                            // the use handler's stopImmediatePropagation will be useless
+                            let existing = document.querySelector('li[data-using="yes"]');
+                            if (existing) {
+                                if (parts[1] == existing.dataset.item) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    e.stopImmediatePropagation();
+                                    handlers.use(p.id, parts[1]);
+                                }
+                            }
+                        }
+                    } else if (handlers[parts[1]]) {
+                        fn = (e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            handlers[parts[1]](p);
+                        }
+                    } else {
+                        fn = () => {
+                            load(parts[1]);
+                        }
+                    }
+                    let vbbg = p.getBBox();
+                    let rect;
+                    if (clickrect) {
+                        rect = clickrect;
+                    } else {
+                        rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                        rect.setAttribute("x", vbbg.x)
+                        rect.setAttribute("y", vbbg.y)
+                        rect.setAttribute("width", vbbg.width)
+                        rect.setAttribute("height", vbbg.height)
+                        rect.setAttribute("fill", "transparent")
+                        rect.dataset.clickable = "clickable";
+                        p.insertBefore(rect, p.firstChild);
+                        clickrect = rect;
+                    }
+                    rect.addEventListener("click", fn, false);
+                } else if (buttons.has(parts[0])) {
+                    buttons_found.add(parts[0]);
+                    document.getElementById(parts[0]).dataset.goto = parts[1];
+                }
+            } else if (parts.length == 1) {
+                if (parts[0] == "takeable") {
+                    fn = (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handlers.take(p);
+                    }
+                    let vbbg = p.getBBox();
+                    let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                    rect.setAttribute("x", vbbg.x)
+                    rect.setAttribute("y", vbbg.y)
+                    rect.setAttribute("width", vbbg.width)
+                    rect.setAttribute("height", vbbg.height)
+                    rect.setAttribute("fill", "transparent")
+                    p.insertBefore(rect, p.firstChild);
+                    rect.onclick = fn;
+                    rect.dataset.clickable = "clickable";
+                } else if (parts[0] == "hidden" && !unhidden.has(p.id)) {
+                    p.style.display = "none";
+                }
+            }
+        })
+    })
+    buttons.forEach(bname => {
+        if (buttons_found.has(bname)) {
+            document.getElementById(bname).style.display = "block";
+        } else {
+            document.getElementById(bname).style.display = "none";
+        }
+    })
+    // and make all not-explicitly-clickable leaf elements unclickable
+    Array.from(document.querySelectorAll("svg *")).forEach(el => {
+        if (!el.dataset.clickable && el.childNodes.length === 0) {
+            el.style.pointerEvents = "none";
+        }
+    })
+    // and remove all already-taken items that aren't in inventory
+    taken.filter(item => item.scene == currentRoom).map(
+        item => { 
+            let obj = document.getElementById(item.obj);
+            if (!obj.closest("#inventory")) {
+                obj.remove();
+            }
+        })
+}
+function resize() {
+    // size the svg
+    let svg = document.querySelector("main > svg");
+    let war = window.innerWidth / window.innerHeight;
+    let sar = 800 / 600;
+    let t, l, w, h;
+    if (war > sar) {
+        h = window.innerHeight;
+        w = h * sar;
+        t = 0;
+        l = (window.innerWidth - w) / 2;
+    } else {
+        w = window.innerWidth;
+        h = w / sar;
+        l = 0;
+        t = (window.innerHeight - h) / 2;
+    }
+    svg.style.height = h + "px";
+    svg.style.width = w + "px";
+    svg.style.top = t + "px";
+    svg.style.left = l + "px";
+    // move inventory
+    let inv = document.querySelector("#inventory");
+    let iw = w / 8;
+    inv.style.width = iw + "px";
+    inv.style.left = (l + w - iw) + "px";
+    inv.style.top = t + "px";
+    inv.style.height = h + "px";
+    // and move the buttons
+    let up = document.querySelector("#up");
+    let right = document.querySelector("#right");
+    let down = document.querySelector("#down");
+    let left = document.querySelector("#left");
+    let bh = h / 20; let bw = w / 20;
+    up.style.top = t + "px"; up.style.left = l + "px";
+    up.style.width = (w - iw) + "px"; up.style.height = bh + "px";
+    left.style.top = t + "px"; left.style.left = l + "px";
+    left.style.width = bw + "px"; left.style.height = h + "px";
+    down.style.top = (t + h - bh) + "px"; down.style.left = l + "px";
+    down.style.width = (w - iw) + "px"; down.style.height = bh + "px";
+    right.style.top = t + "px"; right.style.left = (l + w - bw - iw) + "px";
+    right.style.width = bw + "px"; right.style.height = h + "px";
+}
+async function load(r) {
+    Array.from(document.querySelectorAll("aside div")).forEach(d => { d.remove() });
+    let response = await fetch(r + ".svg");
+    document.querySelector("main").innerHTML = await response.text();
+    currentRoom = r;
+    resize();
+    setTimeout(hookup, 0);
+}
+buttons.forEach(bname => {
+    let b = document.getElementById(bname);
+    b.onclick = () => {
+        load(b.dataset.goto); 
+    }
+});
+load("title");
+window.onresize = resize;
+</script>
+</body>
+</html>
