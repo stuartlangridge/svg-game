@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
 <style>
 html, body, main { margin: 0; padding: 0; box-sizing: border-box; }
 body {
@@ -81,7 +82,18 @@ button {
 ellipse.available-slot {
     fill: rgba(0, 255, 0, 0.4) !important;
 }
-
+aside#error {
+    position: absolute;
+    background: black;
+    color: white;
+    font-family: 'Nanum Brush Script', cursive;
+    border-radius: 20px;
+    font-size: 3vw;
+    padding: 0.2vw 1vw;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 250ms ease-in-out;
+}
 </style>
 </head>
 <body>
@@ -100,6 +112,7 @@ ellipse.available-slot {
     <ul>
     </ul>
 </div>
+<aside id="error">the knife doesn't work on that</aside>
 <script>
 const unhidden = new Set();
 const nowhidden = new Set();
@@ -266,12 +279,20 @@ const handlers = {
             document.getElementById("tiles").style.display = "none";
             nowhidden.add("tiles");
             document.getElementById("tileremove").play();
+        } else {
+            show_error("The " + hammer + " doesn't work on that");
         }
     }
 }
 let currentRoom;
 const taken = [];
 const buttons = new Set(["down", "up", "left", "right"]);
+function show_error(msg) {
+    let aside = document.querySelector("aside#error");
+    aside.textContent = msg;
+    aside.style.opacity = 1;
+    setTimeout(() => { aside.style.opacity = 0; }, 1500);
+}
 function hookup() {
     let buttons_found = new Set();
     let aside = document.querySelector("aside");
@@ -295,6 +316,8 @@ function hookup() {
                                     e.stopPropagation();
                                     e.stopImmediatePropagation();
                                     handlers.use(p.id, parts[1]);
+                                } else {
+                                    show_error("The " + existing.dataset.item + " doesn't work on that");
                                 }
                             }
                         }
@@ -434,6 +457,10 @@ function resize() {
     down.style.width = (w - iw) + "px"; down.style.height = bh + "px";
     right.style.top = t + "px"; right.style.left = (l + w - bw - iw) + "px";
     right.style.width = bw + "px"; right.style.height = h + "px";
+    // and the error
+    let error = document.querySelector("aside#error");
+    error.style.top = (t + bh + 20) + "px";
+    error.style.left = (l + bw + 20) + "px";
 }
 async function load(r) {
     Array.from(document.querySelectorAll("aside div")).forEach(d => { d.remove() });
