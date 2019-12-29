@@ -94,6 +94,9 @@ aside#error {
     opacity: 0;
     transition: opacity 250ms ease-in-out;
 }
+[data-clickrect] {
+    stroke-width: 0 !important;
+}
 </style>
 </head>
 <body>
@@ -117,7 +120,56 @@ aside#error {
 const unhidden = new Set();
 const nowhidden = new Set();
 let coin_move_count = 0;
+let children_order = "";
+let children_posns = {};
+let children_posns_num = {};
+let children_connections = [[0, 1], [0, 3], [1, 2], [1, 4], 
+    [2, 5], [3, 6], [3, 4], [4, 5], [4, 7], [5, 8], [6, 7], [7, 8]];
 const handlers = {
+    children_init: el => {
+        console.log("children init!");
+        children_order = "edrnhcli_";
+        for (let i=0; i<children_order.length; i++) {
+            let el;
+            if (children_order[i] == "_") {
+                el = document.getElementById("children_empty");
+            } else {
+                el = document.getElementById("children_" + children_order[i]);
+            }
+            children_posns_num[i] = el.getBBox();
+            children_posns[children_order[i]] = el.getBBox();
+        }
+    },
+    children_click: el => {
+        let letter = el.id.split("_")[1];
+        if (letter == "empty") return;
+        let lpos = children_order.indexOf(letter);
+        let empty = children_order.indexOf("_");
+        let fromok = children_connections.filter(([a, b]) => a == lpos && b == empty);
+        let took = children_connections.filter(([a, b]) => b == lpos && a == empty);
+        let swapsies = null;
+        if (fromok.length > 0 || took.length > 0) {
+            // swap letter and empty
+            let arr = Array.from(children_order);
+            let tmp = arr[lpos];
+            arr[lpos] = "_";
+            arr[empty] = tmp;
+            children_order = arr.join("");
+            for (let i=0; i<children_order.length; i++) {
+                let el;
+                if (children_order[i] == "_") {
+                    el = document.getElementById("children_empty");
+                } else {
+                    el = document.getElementById("children_" + children_order[i]);
+                }
+                let dx = children_posns_num[i].x - children_posns[children_order[i]].x;
+                el.setAttribute("transform", "translate(" + dx + " 0)");
+            }
+        }
+        if (children_order == "children_") {
+            console.log("victory!");
+        }
+    },
     coin_click: el => {
         // if we don't have slots set up for coins, set them up
         if (!document.querySelector("[data-coin-slot]")) {
@@ -361,6 +413,8 @@ function hookup() {
                 } else if (buttons.has(parts[0])) {
                     buttons_found.add(parts[0]);
                     document.getElementById(parts[0]).dataset.goto = parts[1];
+                } else if (parts[0] == "init") {
+                    handlers[parts[1]](p);
                 }
             } else if (parts.length == 1) {
                 if (parts[0] == "takeable") {
@@ -380,6 +434,9 @@ function hookup() {
                     rect.onclick = fn;
                     rect.dataset.clickable = "clickable";
                 } else if (parts[0] == "hidden" && !unhidden.has(p.id)) {
+                    // note: if an element is hidden and has click or use handlers,
+                    // you must define hidden AFTER other stuff, otherwise we hide it
+                    // first and then can't create the bbox for it to make a clickrect
                     p.style.display = "none";
                 }
             }
