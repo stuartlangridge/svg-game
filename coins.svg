@@ -23,11 +23,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.0545125"
-     inkscape:cx="644.55808"
-     inkscape:cy="494.70424"
+     inkscape:zoom="1.323546"
+     inkscape:cx="599.28822"
+     inkscape:cy="456.6398"
      inkscape:document-units="px"
-     inkscape:current-layer="g1053"
+     inkscape:current-layer="layer4"
      showgrid="false"
      units="px"
      inkscape:window-width="2472"
@@ -844,10 +844,10 @@ right:drawers</desc>
        style="fill:#d9e4b6;fill-opacity:1"
        id="coin_slots">
       <ellipse
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6"
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1"
          id="coin_slot_1_1"
          cx="19.321594"
-         cy="116.89971"
+         cy="112.66638"
          rx="11.384095"
          ry="8.7773724">
         <desc
@@ -856,18 +856,18 @@ right:drawers</desc>
       <ellipse
          ry="8.7773724"
          rx="11.384095"
-         cy="116.89971"
+         cy="112.66638"
          cx="164.84242"
          id="coin_slot_1_6"
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6">
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1">
         <desc
            id="desc1020">click:coin_slot_click</desc>
       </ellipse>
       <ellipse
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6"
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1"
          id="coin_slot_1_5"
          cx="135.73827"
-         cy="116.89971"
+         cy="112.66638"
          rx="11.384095"
          ry="8.7773724">
         <desc
@@ -876,18 +876,18 @@ right:drawers</desc>
       <ellipse
          ry="8.7773724"
          rx="11.384095"
-         cy="116.89971"
+         cy="112.66638"
          cx="106.63409"
          id="coin_slot_1_4"
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6">
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1">
         <desc
            id="desc1028">click:coin_slot_click</desc>
       </ellipse>
       <ellipse
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6"
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1"
          id="coin_slot_1_3"
          cx="77.52993"
-         cy="116.89971"
+         cy="112.66638"
          rx="11.384095"
          ry="8.7773724">
         <desc
@@ -896,28 +896,28 @@ right:drawers</desc>
       <ellipse
          ry="8.7773724"
          rx="11.384095"
-         cy="116.89971"
+         cy="112.66638"
          cx="48.425762"
          id="coin_slot_1_2"
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6">
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1">
         <desc
            id="desc1036">click:coin_slot_click</desc>
       </ellipse>
       <ellipse
          ry="8.7773724"
          rx="11.384095"
-         cy="95.73304"
+         cy="93.616371"
          cx="33.873676"
          id="coin_slot_2_1"
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6">
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1">
         <desc
            id="desc1040">click:coin_slot_click</desc>
       </ellipse>
       <ellipse
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6"
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1"
          id="coin_slot_2_5"
          cx="150.29034"
-         cy="95.73304"
+         cy="93.616371"
          rx="11.384095"
          ry="8.7773724">
         <desc
@@ -926,18 +926,18 @@ right:drawers</desc>
       <ellipse
          ry="8.7773724"
          rx="11.384095"
-         cy="95.73304"
+         cy="93.616371"
          cx="121.18618"
          id="coin_slot_2_4"
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6">
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1">
         <desc
            id="desc1048">click:coin_slot_click</desc>
       </ellipse>
       <ellipse
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6"
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1"
          id="coin_slot_2_3"
          cx="92.082008"
-         cy="95.73304"
+         cy="93.616371"
          rx="11.384095"
          ry="8.7773724">
         <desc
@@ -946,10 +946,10 @@ right:drawers</desc>
       <ellipse
          ry="8.7773724"
          rx="11.384095"
-         cy="95.73304"
+         cy="93.616371"
          cx="62.977844"
          id="coin_slot_2_2"
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6">
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1">
         <desc
            id="desc1056">click:coin_slot_click</desc>
       </ellipse>
@@ -1014,10 +1014,10 @@ right:drawers</desc>
            id="desc1080">click:coin_slot_click</desc>
       </ellipse>
       <ellipse
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6"
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1"
          id="coin_slot_4_1"
          cx="33.873676"
-         cy="53.399712"
+         cy="55.51638"
          rx="11.384095"
          ry="8.7773724">
         <desc
@@ -1026,18 +1026,18 @@ right:drawers</desc>
       <ellipse
          ry="8.7773724"
          rx="11.384095"
-         cy="53.399712"
+         cy="55.51638"
          cx="150.29034"
          id="coin_slot_4_5"
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6">
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1">
         <desc
            id="desc1088">click:coin_slot_click</desc>
       </ellipse>
       <ellipse
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6"
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1"
          id="coin_slot_4_4"
          cx="121.18618"
-         cy="53.399712"
+         cy="55.51638"
          rx="11.384095"
          ry="8.7773724">
         <desc
@@ -1046,28 +1046,28 @@ right:drawers</desc>
       <ellipse
          ry="8.7773724"
          rx="11.384095"
-         cy="53.399712"
+         cy="55.51638"
          cx="92.082008"
          id="coin_slot_4_3"
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6">
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1">
         <desc
            id="desc1096">click:coin_slot_click</desc>
       </ellipse>
       <ellipse
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6"
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1"
          id="coin_slot_4_2"
          cx="62.977844"
-         cy="53.399712"
+         cy="55.51638"
          rx="11.384095"
          ry="8.7773724">
         <desc
            id="desc1100">click:coin_slot_click</desc>
       </ellipse>
       <ellipse
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6"
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1"
          id="coin_slot_5_1"
          cx="19.321594"
-         cy="32.233044"
+         cy="36.466381"
          rx="11.384095"
          ry="8.7773724">
         <desc
@@ -1076,18 +1076,18 @@ right:drawers</desc>
       <ellipse
          ry="8.7773724"
          rx="11.384095"
-         cy="32.233044"
+         cy="36.466381"
          cx="164.84242"
          id="coin_slot_5_6"
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6">
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1">
         <desc
            id="desc1108">click:coin_slot_click</desc>
       </ellipse>
       <ellipse
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6"
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1"
          id="coin_slot_5_5"
          cx="135.73827"
-         cy="32.233044"
+         cy="36.466381"
          rx="11.384095"
          ry="8.7773724">
         <desc
@@ -1096,18 +1096,18 @@ right:drawers</desc>
       <ellipse
          ry="8.7773724"
          rx="11.384095"
-         cy="32.233044"
+         cy="36.466381"
          cx="106.63409"
          id="coin_slot_5_4"
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6">
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1">
         <desc
            id="desc1116">click:coin_slot_click</desc>
       </ellipse>
       <ellipse
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6"
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1"
          id="coin_slot_5_3"
          cx="77.52993"
-         cy="32.233044"
+         cy="36.466381"
          rx="11.384095"
          ry="8.7773724">
         <desc
@@ -1116,16 +1116,16 @@ right:drawers</desc>
       <ellipse
          ry="8.7773724"
          rx="11.384095"
-         cy="32.233044"
+         cy="36.466381"
          cx="48.425762"
          id="coin_slot_5_2"
-         style="opacity:1;stroke-linejoin:bevel;stroke-opacity:1;fill-rule:evenodd;fill-opacity:1;stroke-dashoffset:0;stroke:#cccccc;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658000000023;stroke-width:0.700043380715;fill:#d9e4b6">
+         style="opacity:1;fill:#d9e4b6;fill-opacity:1;fill-rule:evenodd;stroke:#cccccc;stroke-width:0.70004338;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.64583329, 5.29166658;stroke-dashoffset:0;stroke-opacity:1">
         <desc
            id="desc1124">click:coin_slot_click</desc>
       </ellipse>
     </g>
     <g
-       transform="matrix(4.2201364,0,0,4.2201364,-902.6006,-99.710493)"
+       transform="matrix(4.2201364,0,0,4.2201364,-902.6006,-101.82717)"
        id="coin5">
       <desc
          id="desc996">click:coin_click
@@ -1160,7 +1160,7 @@ right:drawers</desc>
     </g>
     <g
        id="coin4"
-       transform="matrix(4.2201364,0,0,4.2201364,-931.70477,-99.710493)">
+       transform="matrix(4.2201364,0,0,4.2201364,-931.70477,-101.82717)">
       <desc
          id="desc993">click:coin_click
 </desc>
@@ -1194,7 +1194,7 @@ right:drawers</desc>
     </g>
     <g
        id="coin6"
-       transform="matrix(4.2201364,0,0,4.2201364,-873.49644,-99.710493)">
+       transform="matrix(4.2201364,0,0,4.2201364,-873.49644,-101.82717)">
       <desc
          id="desc998">click:coin_click
 </desc>
@@ -1295,7 +1295,7 @@ right:drawers</desc>
          id="path973" />
     </g>
     <g
-       transform="matrix(4.2201364,0,0,4.2201364,-902.6006,-142.04383)"
+       transform="matrix(4.2201364,0,0,4.2201364,-902.6006,-139.92715)"
        id="coin1">
       <desc
          id="desc987">click:coin_click

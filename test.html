@@ -209,6 +209,46 @@ const handlers = {
                 add(x, y-1); add(x+1, y-1); add(x, y+1); add(x+1, y+1);
             }
         })
+        // if we are a coin in the middle of a hexagon and there are only 1-coin-wide gaps
+        // in the hexagon, then we can't move anywhere
+        let our_hexagon = {1: "off", 2: "off", 3: "off", 4: "off", 5: "off", 6: "off"};
+        let [our_y, our_x] = el.dataset.coinSlot.split("_").map(x => { return parseInt(x, 10); })
+        let coins_in_text = coins_in.map(([y, x]) => y + "-" + x);
+        let isCoin = (y, x) => {
+            return coins_in_text.includes(y + "-" + x) ? "coin": "empty";
+        }
+        if (our_x > 1) { our_hexagon[3] = isCoin(our_y, our_x-1); }
+        if ((our_x < 5 && our_y % 2 == 0) || (our_x < 6 && our_y % 2 == 1)) {
+            our_hexagon[4] = isCoin(our_y, our_x+1);
+        }
+        if (our_y > 1 && (our_y % 2 == 0)) {
+            our_hexagon[1] = isCoin(our_y-1, our_x);
+            our_hexagon[2] = isCoin(our_y-1, our_x+1);
+        }
+        if (our_y > 1 && (our_y % 2 == 1)) {
+            our_hexagon[1] = isCoin(our_y-1, our_x-1);
+            our_hexagon[2] = isCoin(our_y-1, our_x);
+        }
+        if (our_y < 5 && (our_y % 2 == 0)) {
+            our_hexagon[5] = isCoin(our_y+1, our_x);
+            our_hexagon[6] = isCoin(our_y+1, our_x+1);
+        }
+        if (our_y < 5 && (our_y % 2 == 1)) {
+            our_hexagon[5] = isCoin(our_y+1, our_x-1);
+            our_hexagon[6] = isCoin(our_y+1, our_x);
+        }
+        if ((our_hexagon[1] == "empty" && our_hexagon[2] == "empty") ||
+            (our_hexagon[1] == "empty" && our_hexagon[3] == "empty") ||
+            (our_hexagon[2] == "empty" && our_hexagon[4] == "empty") ||
+            (our_hexagon[3] == "empty" && our_hexagon[5] == "empty") ||
+            (our_hexagon[4] == "empty" && our_hexagon[5] == "empty") ||
+            (our_hexagon[5] == "empty" && our_hexagon[6] == "empty")) {
+            // there is a two-coin gap, so we're OK; continue as planned
+        } else {
+            // no two-coin gap, so wipe two_coin_slots because this coin is not moveable
+            two_coin_slots = {};
+        }
+
         for (let k in two_coin_slots) {
             if (two_coin_slots[k] >= 2) {
                 let slot = document.getElementById("coin_slot_" + k.replace(",", "_"));
