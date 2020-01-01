@@ -138,7 +138,78 @@ let children_posns = {};
 let children_posns_num = {};
 let children_connections = [[0, 1], [0, 3], [1, 2], [1, 4], 
     [2, 5], [3, 6], [3, 4], [4, 5], [4, 7], [5, 8], [6, 7], [7, 8]];
+let book_page = 1;
 const handlers = {
+    lines_intersect: (p1, p2, p3, p4) => {
+        function Turn(p1, p2, p3) {
+            a = p1.x; b = p1.y; 
+            c = p2.x; d = p2.y;
+            e = p3.x; f = p3.y;
+            A = (f - b) * (c - a);
+            B = (d - b) * (e - a);
+            return (A > B + Number.EPSILON) ? 1 : (A + Number.EPSILON < B) ? -1 : 0;
+        }
+        return (Turn(p1, p3, p4) != Turn(p2, p3, p4)) && (Turn(p1, p2, p3) != Turn(p1, p2, p4));
+    },
+    book_child_move: el => {
+        let thisend = el;
+        let [c, level, group, end] = el.id.split("_");
+        let otherend_id = c + "_" + level + "_" + group + "_" + (end == "1" ? "2" : "1");
+        let otherend = document.getElementById(otherend_id);
+        let rope = document.getElementById("rope_" + level + "_" + group);
+        console.log("Moving", thisend, "attached to", otherend, otherend_id, "by", rope);
+        // calculate crossings by seeing if the rope intersects any of the four lines of the square of an adult
+        let rbb = rope.getBBox();
+        let rbbtl = {x: rbb.x, y:rbb.y};
+        let rbbbr = {x:rbb.x+rbb.width, y:rbb.y+rbb.height};
+        Array.from(document.querySelectorAll("#adult_3 path")).forEach(adult => {
+            let bb = adult.getBBox();
+            let bbt1 = {x: bb.x, y: bb.y};
+            let bbt2 = {x: bb.x+bb.width, y: bb.y};
+            let bbl1 = {x: bb.x, y: bb.y};
+            let bbl2 = {x: bb.x, y: bb.y+bb.height};
+            let bbr1 = {x: bb.x+bb.width, y: bb.y};
+            let bbr2 = {x: bb.x+bb.width, y: bb.y+bb.height};
+            let bbb1 = {x: bb.x, y: bb.y+bb.height};
+            let bbb2 = {x: bb.x+bb.width, y: bb.y+bb.height};
+
+            if (handlers.lines_intersect(rbbtl, rbbbr, bbt1, bbt2) ||
+                handlers.lines_intersect(rbbtl, rbbbr, bbl1, bbl2) ||
+                handlers.lines_intersect(rbbtl, rbbbr, bbb1, bbb2) ||
+                handlers.lines_intersect(rbbtl, rbbbr, bbr1, bbr2)) {
+                adult.setAttribute("data-fill", adult.style.fill);
+                adult.style.fill = "red";
+            } else {
+                var prevfill = adult.getAttribute("data-fill");
+                if (prevfill) {
+                    adult.style.fill = prevfill;
+                }
+            }
+        });
+    },
+    book_right: el => {
+        book_page += 1;
+        handlers.book_set_page(book_page);
+    },
+    book_left: el => {
+        if (book_page > 1) {
+            book_page -= 1;
+            handlers.book_set_page(book_page);
+        }
+    },
+    book_init: el => {
+        handlers.book_set_page(book_page);
+    },
+    book_set_page: required_page => {
+        Array.from(document.querySelectorAll('g[id^="page_"]')).forEach(page_el => {
+            let pageno = parseInt(page_el.id.split("_")[1], 10);
+            if (pageno == required_page) {
+                page_el.style.visibility = "visible";
+            } else {
+                page_el.style.visibility = "hidden";
+            }
+        })
+    },
     children_init: el => {
         console.log("children init!");
         children_order = "edrnhcli_";
@@ -414,7 +485,7 @@ function hookup() {
         el.textContent.split("\n").forEach(line => {
             let parts = line.trim().split(":");
             if (parts.length == 2) {
-                if (parts[0] == "click" || parts[0] == "use") {
+                if (parts[0] == "click" || parts[0] == "use" || parts[0] == "mousedown") {
                     let fn;
                     if (parts[0] == "use") {
                         fn = (e) => {
@@ -469,7 +540,11 @@ function hookup() {
                         }
                         clickrect = rect;
                     }
-                    rect.addEventListener("click", fn, false);
+                    if (parts[0] == "mousedown") {
+                        rect.addEventListener("mousedown", fn, false);
+                    } else {
+                        rect.addEventListener("click", fn, false);
+                    }
                 } else if (buttons.has(parts[0])) {
                     buttons_found.add(parts[0]);
                     document.getElementById(parts[0]).dataset.goto = parts[1];
@@ -497,7 +572,7 @@ function hookup() {
                     // note: if an element is hidden and has click or use handlers,
                     // you must define hidden AFTER other stuff, otherwise we hide it
                     // first and then can't create the bbox for it to make a clickrect
-                    p.style.display = "none";
+                    p.style.visibility = "hidden";
                 }
             }
         })
