@@ -94,6 +94,18 @@ aside#error {
     opacity: 0;
     transition: opacity 250ms ease-in-out;
 }
+aside#taken {
+    position: absolute;
+    background: black;
+    color: white;
+    font-family: 'Nanum Brush Script', cursive;
+    border-radius: 20px;
+    font-size: 3vw;
+    padding: 0.2vw 1vw;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 250ms ease-in-out;
+}
 [data-clickrect] {
     stroke-width: 0 !important;
 }
@@ -116,6 +128,7 @@ aside#error {
     </ul>
 </div>
 <aside id="error">the knife doesn't work on that</aside>
+<aside id="taken">knife</aside>
 <script>
 const unhidden = new Set();
 const nowhidden = new Set();
@@ -354,6 +367,7 @@ const handlers = {
             }
         }
         document.querySelector("#inventory ul").appendChild(li);
+        show_taken(el.getAttribute("id"));
     },
     use: (nail, hammer) => { // these are IDs, not elements
         console.log("using", hammer, "on", nail);
@@ -381,6 +395,12 @@ const taken = [];
 const buttons = new Set(["down", "up", "left", "right"]);
 function show_error(msg) {
     let aside = document.querySelector("aside#error");
+    aside.textContent = msg;
+    aside.style.opacity = 1;
+    setTimeout(() => { aside.style.opacity = 0; }, 1500);
+}
+function show_taken(msg) {
+    let aside = document.querySelector("aside#taken");
     aside.textContent = msg;
     aside.style.opacity = 1;
     setTimeout(() => { aside.style.opacity = 0; }, 1500);
@@ -558,6 +578,10 @@ function resize() {
     let error = document.querySelector("aside#error");
     error.style.top = (t + bh + 20) + "px";
     error.style.left = (l + bw + 20) + "px";
+    // and the taken
+    let taken = document.querySelector("aside#taken");
+    taken.style.top = (t + bh + 20) + "px";
+    taken.style.right = (((window.innerWidth - w) / 2) + iw + 20) + "px";
 }
 async function load(r) {
     Array.from(document.querySelectorAll("aside div")).forEach(d => { d.remove() });
