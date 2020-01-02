@@ -261,7 +261,10 @@ const handlers = {
                 }
             });
             if (unfilled == 0) {
-                console.log("victory");
+                document.getElementById("ignite").play();
+                document.querySelector("#flames_3").style.visibility = "visible";
+                setTimeout(() => { document.querySelector("#adult_3").style.visibility = "hidden"; }, 500);
+                setTimeout(() => { document.querySelector("#flames_3").style.visibility = "hidden"; }, 1000);
             }
         }
 
