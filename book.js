@@ -1,4 +1,5 @@
 let book_page = 1;
+let book_child_level = 3;
 
 handlers.book_child_move = (el, event) => {
     // get dragged element and those it's paired with
@@ -63,8 +64,8 @@ handlers.book_child_move = (el, event) => {
         rope.setAttribute("d", "M" + ropestartx + "," + ropestarty + " " + ropeendx + "," + ropeendy);
 
         // calculate crossings by seeing if the ropes intersects any of the four lines of the square of an adult
-        let rope1 = document.getElementById("rope_3_1");
-        let rope2 = document.getElementById("rope_3_2");
+        let rope1 = document.getElementById("rope_" + book_child_level + "_1");
+        let rope2 = document.getElementById("rope_" + book_child_level + "_2");
         let rnums1 = rope1.getAttribute("d").match(/[0-9.-]+/g).map(n => { return Math.round(parseFloat(n)); })
         let rbb1s = {x: rnums1[0], y: rnums1[1] };
         let rbb1e = {x: rnums1[2], y: rnums1[3] };
@@ -100,9 +101,9 @@ handlers.book_child_move = (el, event) => {
         });
         if (unfilled == 0) {
             document.getElementById("ignite").play();
-            document.querySelector("#flames_3").style.visibility = "visible";
-            setTimeout(() => { document.querySelector("#adult_3").style.visibility = "hidden"; }, 500);
-            setTimeout(() => { document.querySelector("#flames_3").style.visibility = "hidden"; }, 1000);
+            document.querySelector("#flames_" + book_child_level).style.visibility = "visible";
+            setTimeout(() => { document.querySelector("#adult_" + book_child_level).style.visibility = "hidden"; }, 500);
+            setTimeout(() => { document.querySelector("#flames_" + book_child_level).style.visibility = "hidden"; }, 1000);
         }
     }
 
@@ -124,7 +125,7 @@ handlers.book_left = el => {
 }
 
 handlers.book_init = el => {
-    Array.from(document.querySelectorAll("#adult_3 path")).forEach(adult => {
+    Array.from(document.querySelectorAll('[id^="adult_"] path')).forEach(adult => {
         adult.setAttribute("data-fill", adult.style.fill);
     })
     handlers.book_set_page(book_page);
