@@ -72,9 +72,6 @@ handlers.book_child_move = (el, event) => {
         let ropes_lines = rnums.map(rn => {
             return [{x: rn[0], y: rn[1]}, {x: rn[2], y: rn[3]}]
         })
-        console.log("ropes", ropes);
-        console.log("rnums", rnums);
-        console.log("ropes_lines", ropes_lines);
         let unfilled = 0;
         Array.from(document.querySelectorAll("#adult_" + book_child_level + " path")).forEach(adult => {
             let bb = adult.getBBox();
