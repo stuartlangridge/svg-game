@@ -25,15 +25,9 @@ const handlers = {
         bb.y += parseFloat(t[2]);
         return bb;
     },
-    drawer_slide: el => {
-        if (!el.dataset.open) {
-            el.style.transform = "translateY(16%)";
-            el.dataset.open = "yes";
-        } else {
-            el.style.transform = "";
-            el.dataset.open = "";
-        }
-        document.getElementById("drawer").play();
+    play_locked: el => {
+        document.getElementById("locked").play();
+        show_error("locked");
     },
     start_music: el => {
         document.getElementById("bgm").play();
