@@ -288,10 +288,10 @@ function resize() {
 }
 async function load(r) {
     Array.from(document.querySelectorAll("aside div")).forEach(d => { d.remove() });
-    let response = await fetch(r + ".svg");
+    let response = await fetch(r + ".svg" + "?cache=" + (new Date().getTime()));
     let response_js;
     if (!document.querySelector('script[data-room="' + r + '"]')){
-        response_js = await fetch(r + ".js");
+        response_js = await fetch(r + ".js" + "?cache=" + (new Date().getTime()));
     }
     document.querySelector("main").style.opacity = "0";
     setTimeout(async () => {

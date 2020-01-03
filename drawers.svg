@@ -25,11 +25,11 @@
      inkscape:window-width="2472"
      units="px"
      showgrid="false"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="g1151"
      inkscape:document-units="px"
-     inkscape:cy="318.03749"
-     inkscape:cx="489.16447"
-     inkscape:zoom="1.6794959"
+     inkscape:cy="380.98003"
+     inkscape:cx="511.21467"
+     inkscape:zoom="2.1079789"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -1034,7 +1034,7 @@ right:room-n</desc>
          height="29.765348"
          width="33.177937"
          id="rect1847"
-         style="opacity:1;fill:#b1c96a;fill-opacity:1;stroke:#000000;stroke-width:0.56413925;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter2528-3)" />
+         style="opacity:1;fill:#b1c96a;fill-opacity:1;stroke:#000000;stroke-width:0.56413925;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;" />
       <g
          style="filter:url(#filter2528-3)"
          id="drawer1">
@@ -1192,7 +1192,7 @@ right:room-n</desc>
         </g>
       </g>
       <g
-         style="filter:url(#filter2528-3)"
+         style=""
          id="draweropen4">
         <desc
            id="desc1003">click:drawer_slide</desc>
@@ -1276,7 +1276,7 @@ right:room-n</desc>
            y="267.8064" />
       </g>
       <g
-         style="filter:url(#filter2528-3)"
+         style=""
          id="draweropen3"
          inkscape:label="#draweropen3">
         <desc
@@ -1535,7 +1535,7 @@ right:room-n</desc>
         </g>
       </g>
       <g
-         style="filter:url(#filter2528-3)"
+         style=""
          id="draweropen2">
         <desc
            id="desc999">click:drawer_slide</desc>
@@ -1619,7 +1619,7 @@ right:room-n</desc>
            y="267.8064" />
       </g>
       <g
-         style="filter:url(#filter2528-3)"
+         style=""
          id="draweropen1"
          inkscape:label="#draweropen1">
         <desc
@@ -1730,16 +1730,16 @@ right:room-n</desc>
         </g>
       </g>
       <path
-         style="stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;fill-rule:evenodd;filter:url(#filter2528-3);stroke:#000000;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:1.05833332;fill:#d9e4b6"
+         style="stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:butt;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:1.05833332;fill:#d9e4b6"
          d="M68.665316 34.77291C68.665316 34.77291 120.8402 34.77291 120.8402 34.77291C120.8402 34.77291 126.96733 69.05861 126.96733 69.05861C126.96733 69.05861 62.53818 69.05861 62.53818 69.05861C62.53818 69.05861 68.665316 34.77291 68.665316 34.77291C68.665316 34.77291 68.665316 34.77291 68.665316 34.77291"
          id="path2668" />
       <path
          id="path2659"
-         style="stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;fill-rule:evenodd;filter:url(#filter2528-3);stroke:#000000;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:1.05833332;fill:#b1c96a"
+         style="stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:1.05833332;fill:#b1c96a"
          d="M58.671626 69.16043C58.671626 69.16043 58.671625 69.16043 58.671625 69.16043C58.671625 69.16043 64.798761 34.87473 64.798761 34.87473C64.798761 34.87473 68.665316 34.77291 68.665316 34.77291C68.665316 34.77291 62.53818 69.05861 62.53818 69.05861C62.53818 69.05861 58.671626 69.16043 58.671626 69.16043C58.671626 69.16043 58.671626 69.16043 58.671626 69.16043" />
       <path
          d="M130.83389 69.16043C130.83389 69.16043 130.83389 69.16043 130.83389 69.16043C130.83389 69.16043 124.70675 34.87473 124.70675 34.87473C124.70675 34.87473 120.8402 34.77291 120.8402 34.77291C120.8402 34.77291 126.96733 69.05861 126.96733 69.05861C126.96733 69.05861 130.83389 69.16043 130.83389 69.16043C130.83389 69.16043 130.83389 69.16043 130.83389 69.16043"
-         style="stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;fill-rule:evenodd;filter:url(#filter2528-3);stroke:#000000;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:1.05833332;fill:#b1c96a"
+         style="stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-width:1.05833332;fill:#b1c96a"
          id="path2664" />
       <rect
          transform="matrix(1.000000,0.000000,0.000000,1.000000,0.000000,0.000000)"

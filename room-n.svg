@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.1802992"
-     inkscape:cx="328.62082"
-     inkscape:cy="241.8268"
+     inkscape:zoom="4.9832304"
+     inkscape:cx="537.6904"
+     inkscape:cy="228.63511"
      inkscape:document-units="px"
      inkscape:current-layer="cabinet"
      showgrid="false"
@@ -1103,6 +1103,17 @@ hidden
          cx="257.86862"
          cy="78.210609"
          r="1.6820265" />
+      <circle
+         style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.79374999;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         id="path1000"
+         cx="251.48183"
+         cy="81.702927"
+         r="0.53412545" />
+      <path
+         style="fill:#000000;fill-rule:evenodd;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 251.29898,81.732657 -0.34841,1.300295 h 1.05763 l -0.38336,-1.290709 z"
+         id="path1002"
+         inkscape:connector-curvature="0" />
     </g>
     <g
        id="book"

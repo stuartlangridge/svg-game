@@ -1,13 +1,13 @@
 let book_page = 1;
-let book_child_level = 3;
+let book_child_level = 4;
 
 handlers.book_child_move = (el, event) => {
     // get dragged element and those it's paired with
     let thisend = el;
-    let [c, level, group, end] = el.id.split("_");
-    let otherend_id = c + "_" + level + "_" + group + "_" + (end == "1" ? "2" : "1");
+    let [c, group, end] = el.id.split("_");
+    let otherend_id = c + "_" + group + "_" + (end == "1" ? "2" : "1");
     let otherend = document.getElementById(otherend_id);
-    let rope = document.getElementById("rope_" + level + "_" + group);
+    let rope = document.getElementById("rope_" + group);
     //console.log("Moving", thisend.id, "attached to", otherend_id, "by", rope.id);
 
     // calculate positions for everything so child can't be dragged off page
@@ -64,34 +64,55 @@ handlers.book_child_move = (el, event) => {
         rope.setAttribute("d", "M" + ropestartx + "," + ropestarty + " " + ropeendx + "," + ropeendy);
 
         // calculate crossings by seeing if the ropes intersects any of the four lines of the square of an adult
-        let rope1 = document.getElementById("rope_" + book_child_level + "_1");
-        let rope2 = document.getElementById("rope_" + book_child_level + "_2");
-        let rnums1 = rope1.getAttribute("d").match(/[0-9.-]+/g).map(n => { return Math.round(parseFloat(n)); })
-        let rbb1s = {x: rnums1[0], y: rnums1[1] };
-        let rbb1e = {x: rnums1[2], y: rnums1[3] };
-        let rnums2 = rope2.getAttribute("d").match(/[0-9.-]+/g).map(n => { return Math.round(parseFloat(n)); })
-        let rbb2s = {x: rnums2[0], y: rnums2[1] };
-        let rbb2e = {x: rnums2[2], y: rnums2[3] };
+        let ropes = [];
+        for (var i=1; i<book_child_level; i++) { ropes.push(document.getElementById("rope_" + i)); }
+        let rnums = ropes.map(r => {
+            return r.getAttribute("d").match(/[0-9.-]+/g).map(n => { return Math.round(parseFloat(n)); })
+        })
+        let ropes_lines = rnums.map(rn => {
+            return [{x: rn[0], y: rn[1]}, {x: rn[2], y: rn[3]}]
+        })
+        console.log("ropes", ropes);
+        console.log("rnums", rnums);
+        console.log("ropes_lines", ropes_lines);
         let unfilled = 0;
-        Array.from(document.querySelectorAll("#adult_3 path")).forEach(adult => {
+        Array.from(document.querySelectorAll("#adult_" + book_child_level + " path")).forEach(adult => {
             let bb = adult.getBBox();
-            let bbt1 = {x: Math.round(bb.x), y: Math.round(bb.y)};
-            let bbt2 = {x: Math.round(bb.x+bb.width), y: Math.round(bb.y)};
-            let bbl1 = {x: Math.round(bb.x), y: Math.round(bb.y)};
-            let bbl2 = {x: Math.round(bb.x), y: Math.round(bb.y+bb.height)};
-            let bbr1 = {x: Math.round(bb.x+bb.width), y: Math.round(bb.y)};
-            let bbr2 = {x: Math.round(bb.x+bb.width), y: Math.round(bb.y+bb.height)};
-            let bbb1 = {x: Math.round(bb.x), y: Math.round(bb.y+bb.height)};
-            let bbb2 = {x: Math.round(bb.x+bb.width), y: Math.round(bb.y+bb.height)};
+            let bbedges = [
+                [ // top
+                    {x: Math.round(bb.x), y: Math.round(bb.y)},
+                    {x: Math.round(bb.x+bb.width), y: Math.round(bb.y)}
+                ],
+                [ // left
+                    {x: Math.round(bb.x), y: Math.round(bb.y)},
+                    {x: Math.round(bb.x), y: Math.round(bb.y+bb.height)}
+                ],
+                [ // bottom
+                    {x: Math.round(bb.x+bb.width), y: Math.round(bb.y)},
+                    {x: Math.round(bb.x+bb.width), y: Math.round(bb.y+bb.height)}
+                ],
+                [ // right
+                    {x: Math.round(bb.x), y: Math.round(bb.y+bb.height)},
+                    {x: Math.round(bb.x+bb.width), y: Math.round(bb.y+bb.height)}
+                ]
+            ];
 
-            if (handlers.lines_intersect(rbb1s, rbb1e, bbt1, bbt2) ||
-                handlers.lines_intersect(rbb1s, rbb1e, bbl1, bbl2) ||
-                handlers.lines_intersect(rbb1s, rbb1e, bbb1, bbb2) ||
-                handlers.lines_intersect(rbb1s, rbb1e, bbr1, bbr2) ||
-                handlers.lines_intersect(rbb2s, rbb2e, bbt1, bbt2) ||
-                handlers.lines_intersect(rbb2s, rbb2e, bbl1, bbl2) ||
-                handlers.lines_intersect(rbb2s, rbb2e, bbb1, bbb2) ||
-                handlers.lines_intersect(rbb2s, rbb2e, bbr1, bbr2)) {
+            let intersections = 0;
+            ropes_lines.forEach((rope_line, ridx) => {
+                bbedges.forEach((bbedge, bidx) => {
+                    if (handlers.lines_intersect(rope_line[0], rope_line[1], bbedge[0], bbedge[1])) {
+                        intersections += 1;
+                        /*
+                        console.log("%cr", "background:#9f9", ridx, 
+                            "(" + rope_line[0].x + "," + rope_line[0].y + "-" + rope_line[1].x + "," + rope_line[1].y + ")",
+                            adult.id, bidx,
+                            "(" + bbedge[0].x + "," + bbedge[0].y + "-" + bbedge[1].x + "," + bbedge[1].y + ")", "HIT");
+                        */
+                    }
+                })
+            })
+
+            if (intersections > 0) {
                 adult.style.fill = "black";
             } else {
                 var prevfill = adult.getAttribute("data-fill");
@@ -100,16 +121,56 @@ handlers.book_child_move = (el, event) => {
             }
         });
         if (unfilled == 0) {
+            // hide this level
+            let exiting_book_child_level = book_child_level;
+            book_child_level += 1;
+
             document.getElementById("ignite").play();
-            document.querySelector("#flames_" + book_child_level).style.visibility = "visible";
-            setTimeout(() => { document.querySelector("#adult_" + book_child_level).style.visibility = "hidden"; }, 500);
-            setTimeout(() => { document.querySelector("#flames_" + book_child_level).style.visibility = "hidden"; }, 1000);
+            document.querySelector("#flames_" + exiting_book_child_level).style.visibility = "visible";
+            setTimeout(() => { document.querySelector("#adult_" + exiting_book_child_level).style.visibility = "hidden"; }, 250);
+            setTimeout(() => { document.querySelector("#flames_" + exiting_book_child_level).style.visibility = "hidden"; }, 600);
+
+            // and go to the next level
+            setTimeout(handlers.book_child_init_level, 700);
         }
     }
 
     document.addEventListener("mousemove", mm);
     document.addEventListener("mouseup", mu);
     return;
+}
+
+handlers.book_child_init_level = () => {
+    // hide all children and ropes
+    Array.from(document.querySelectorAll('g[id^="adult_"]')).forEach(c => { c.style.visibility = "hidden"; });
+    Array.from(document.querySelectorAll('[id^="child_"]')).forEach(c => { c.style.visibility = "hidden"; });
+    Array.from(document.querySelectorAll('[id^="rope_"]')).forEach(c => { c.style.visibility = "hidden"; });
+    // show children and ropes for this level
+    if (book_page == 2) {
+        if (book_child_level == 5) {
+            console.log("victory is mine! show the puzzle answer!")
+        } else {
+            document.querySelector("#adult_" + book_child_level).style.visibility = "visible";
+            for (var i=1; i<book_child_level; i++) {
+                let c1 = document.getElementById("child_" + i + "_1");
+                c1.style.visibility = "visible";
+                c1.setAttribute("transform", "");
+                let c2 = document.getElementById("child_" + i + "_2");
+                c2.style.visibility = "visible";
+                c2.setAttribute("transform", "");
+                let rope = document.getElementById("rope_" + i);
+                rope.style.visibility = "visible";
+                // move the rope
+                let thisend_bb = handlers.get_transformed_bbox(c1);
+                let otherend_bb = handlers.get_transformed_bbox(c2);
+                let ropestartx = Math.round(thisend_bb.x + (thisend_bb.width / 2));
+                let ropestarty = Math.round(thisend_bb.y + (thisend_bb.height / 2));
+                let ropeendx = Math.round(otherend_bb.x + (otherend_bb.width / 2));
+                let ropeendy = Math.round(otherend_bb.y + (otherend_bb.height / 2));
+                rope.setAttribute("d", "M" + ropestartx + "," + ropestarty + " " + ropeendx + "," + ropeendy);
+            }
+        }
+    }
 }
 
 handlers.book_right = el => {
@@ -140,4 +201,5 @@ handlers.book_set_page = required_page => {
             page_el.style.visibility = "hidden";
         }
     })
+    handlers.book_child_init_level();
 }
