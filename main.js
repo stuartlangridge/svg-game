@@ -313,5 +313,7 @@ buttons.forEach(bname => {
         load(b.dataset.goto); 
     }
 });
+document.onkeydown = e => { if (e.which == 32) document.body.classList.add("space"); }
+document.onkeyup = e => { document.body.classList.remove("space"); }
 load("title");
 window.onresize = resize;

@@ -1,5 +1,5 @@
 let book_page = 1;
-let book_child_level = 4;
+let book_child_level = 3;
 
 handlers.book_child_move = (el, event) => {
     // get dragged element and those it's paired with
